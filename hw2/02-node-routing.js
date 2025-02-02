@@ -24,28 +24,28 @@ const server = http.createServer((req, res) => {
 
   if (req.url === '/welcome') {
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.write('<h1>Welcome Node JS!');
+    res.write('<h1>Welcome Node JS!</h1>');
     res.end();
   } else if (req.url === '/redirect') {
-    res.writeHead(302, { Location: '/newRoute' });
+    res.writeHead(302, { Location: '/redirected' });
     res.end();
-  } else if (req.url === '/newRoute') {
+  } else if (req.url === '/redirected') {
     res.writeHead(200, { 'content-type': 'text/html' });
-    res.write('<h2>Redirected to another route!</h2>');
+    res.write('<h1>Redirected to another route!</h1>');
     res.end();
   } else if (req.url === '/cache') {
     res.writeHead(200, {
       'Content-Type': 'text/html',
       'Cache-Control': 'max-age=86400',
     });
-    res.write('<h2>this resource was cached</h2>');
+    res.write('<h1>This resource was cached</h1>');
     res.end();
   } else if (req.url === '/cookie') {
     res.writeHead(200, {
       'Content-Type': 'text/plain',
       'Set-Cookie': 'hello=world',
     });
-    res.write('cookies yummm');
+    res.write('<h1>cookies yummm</h1>');
     res.end();
   } else {
     res.writeHead(404, { 'Content-Type': 'text/html' });
