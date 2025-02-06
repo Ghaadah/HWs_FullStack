@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5005;
 
 // http://localhost:5001/welcome should return a status code 200 with a welcome message of your choice in html format
 
@@ -12,29 +12,27 @@ const port = process.env.PORT || 5001;
 
 // For other routes, such as http://localhost:5001/other, this exercise should return a status code 404 with '404 - page not found' in html format
 
-const routes = [
-  'welcome',
-  'redirect',
-  'redirected',
-  'cache',
-  'cookie',
-  'other',
-];
+// const routes = [
+//   'welcome',
+//   'redirect',
+//   'redirected',
+//   'cache',
+//   'cookie',
+//   'other',
+// ];
 
-app.get('/welcome', (req, res) => {
+app.get(['/', '/welcome'], (req, res) => {
   res.status(200);
   res.set({ 'Content-Type': 'text/html' });
   res.send('<h1>Welcome Express!</h1>');
 });
 
 app.get('/redirect', (req, res) => {
-  res.status(302);
-  res.set({ Location: '/redirected' });
-  res.send();
+  res.redirect('/redirected');
 });
 app.get('/redirected', (req, res) => {
   res.status(200);
-  res.set({ 'Contact-Type': 'text/html' });
+  res.set({ 'Content-Type': 'text/html' });
   res.send('<p>This is a redirected page</p>');
 });
 app.get('/cache', (req, res) => {
@@ -44,8 +42,14 @@ app.get('/cache', (req, res) => {
 });
 app.get('/cookie', (req, res) => {
   res.status(200);
-  res.set({ 'Content-Type': 'text/html', 'Cookie-set': 'hello=world' });
+  res.set({ 'Content-Type': 'text/html', 'Set-Cookie': 'hello=world' });
   res.send('<p>cookies… yummm</p>');
+});
+//handle 404
+app.use((req, res) => {
+  res.status(404),
+    res.set({ 'Content-Type': 'text/html' }),
+    res.send('<h2>404: Page not found</h2>');
 });
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

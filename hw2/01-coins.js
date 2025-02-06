@@ -1,13 +1,16 @@
 /** Exercise 01 - Coins **/
 
 // Add your function here
-function calculateChange(amount) {
+const calculateChange = (amount) => {
   //check the amount
   if (amount > 100) {
-    return 'Error: the number is too large';
+    return 'Error: The number is too large';
   } else if (amount < 0) {
-    return 'Error: the number is too small';
-  }
+    return 'Error: The number is too small';
+  } else if (amount === 0) return 'The number is Zero! so 0 pennies';
+  else if (typeof amount !== 'number')
+    return 'Error: The value is not a number';
+
   //convert the amount to cents
   let cents = Math.round(amount * 100);
 
@@ -25,12 +28,18 @@ function calculateChange(amount) {
   for (let coin in coins) {
     let count = Math.floor(cents / coins[coin]);
     if (count > 0) {
-      result.push(`${count} ${coin}${count > 1 ? 's' : ''}`);
+      result.push(
+        `${count} ${
+          coin === 'penny' && count > 1
+            ? 'pennies'
+            : coin + (count > 1 ? 's' : '')
+        }`
+      );
       cents %= coins[coin];
     }
   }
   return `$${amount} ==> ` + result.join(', ');
-}
+};
 
 // Sample test cases
 console.log(calculateChange(4.62));
@@ -42,3 +51,5 @@ console.log(calculateChange(150.11));
 
 // Add additional test cases here
 console.log(calculateChange(-4));
+//Add string
+console.log(calculateChange('100 dollars'));

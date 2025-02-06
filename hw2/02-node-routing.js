@@ -1,6 +1,6 @@
 //import http from 'http';
 const http = require('http');
-const port = process.env.port || 5003;
+const port = process.env.PORT || 5002;
 
 // http://localhost:5001/welcome should return a status code 200 with a welcome message of your choice in html format
 
@@ -13,18 +13,18 @@ const port = process.env.port || 5003;
 // For other routes, such as http://localhost:5001/other, this exercise should return a status code 404 with '404 - page not found' in html format
 
 const server = http.createServer((req, res) => {
-  const routes = [
-    'welcome',
-    'redirect',
-    'redirected',
-    'cache',
-    'cookie',
-    'other',
-  ];
+  // const routes = [
+  //   'welcome',
+  //   'redirect',
+  //   'redirected',
+  //   'cache',
+  //   'cookie',
+  //   'other',
+  // ];
 
-  if (req.url === '/welcome') {
+  if (req.url === '/' || req.url === '/welcome') {
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.write('<h1>Welcome Node JS!</h1>');
+    res.write('<h1>Welcome to Node JS!</h1>');
     res.end();
   } else if (req.url === '/redirect') {
     res.writeHead(302, { Location: '/redirected' });
@@ -45,11 +45,11 @@ const server = http.createServer((req, res) => {
       'Content-Type': 'text/plain',
       'Set-Cookie': 'hello=world',
     });
-    res.write('<h1>cookies yummm</h1>');
+    res.write('<cookies... yummm');
     res.end();
   } else {
     res.writeHead(404, { 'Content-Type': 'text/html' });
-    res.write('<h1> 404 - page not found</h1>');
+    res.write('<h2> 404: Page not found</h2>');
     res.end();
   }
 });
