@@ -1,16 +1,16 @@
-##Homework 3 – Full Stack Frameworks and Libraries##
+## Homework 3 – Full Stack Frameworks and Libraries ##
 
-###Homework Options###
+### Homework Options ###
 
-###Option-1###
--React
- -tic-tac-toe game
--TypeScript
--Socket.IO
--GoogleMaps
+### Option-1 ###
+- React
+   - tic-tac-toe game
+- TypeScript
+- Socket.IO
+- GoogleMaps
 
-###Option-2###
--Express
+### Option-2 ###
+- Express
 
-###Option-3###
--Templating
+### Option-3 ###
+- Templating
