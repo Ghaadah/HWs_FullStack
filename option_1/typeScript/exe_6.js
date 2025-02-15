@@ -32,22 +32,29 @@ exports.adminsOfAge23 = exports.usersOfAge23 = exports.persons = void 0;
 exports.logPerson = logPerson;
 exports.filterPersons = filterPersons;
 exports.persons = [
-    { type: 'user', name: 'Max Mustermann', age: 25, occupation: 'Chimney sweep' },
+    {
+        type: 'user',
+        name: 'Max Mustermann',
+        age: 25,
+        occupation: 'Chimney sweep',
+    },
     { type: 'admin', name: 'Jane Doe', age: 32, role: 'Administrator' },
     { type: 'user', name: 'Kate Müller', age: 23, occupation: 'Astronaut' },
     { type: 'admin', name: 'Bruce Willis', age: 64, role: 'World saver' },
     { type: 'user', name: 'Wilson', age: 23, occupation: 'Ball' },
-    { type: 'admin', name: 'Agent Smith', age: 23, role: 'Anti-virus engineer' }
+    { type: 'admin', name: 'Agent Smith', age: 23, role: 'Anti-virus engineer' },
 ];
 function logPerson(person) {
     console.log(" - ".concat(person.name, ", ").concat(person.age, ", ").concat(person.type === 'admin' ? person.role : person.occupation));
 }
-var getObjectKeys = function (obj) { return Object.keys(obj); };
+var getObjectKeys = function (obj) {
+    return Object.keys(obj);
+};
 function filterPersons(persons, personType, criteria) {
     return persons
         .filter(function (person) { return person.type === personType; })
         .filter(function (person) {
-        var criteriaKeys = Object.keys(criteria);
+        var criteriaKeys = getObjectKeys(criteria);
         return criteriaKeys.every(function (fieldName) {
             return person[fieldName] === criteria[fieldName];
         });
