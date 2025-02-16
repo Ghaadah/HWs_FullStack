@@ -38,7 +38,7 @@
       /* TODO: Step 4A1: Make a generic sidebar */
       #panal {
         height: 100%;
-        width: null;
+        width: 20%;
         background-color: white;
         position: fixed;
         z-index: 1;
@@ -56,7 +56,8 @@
         max-height: 166px;
         display: block;
       }
-      .place {
+      .place,
+      p {
         font-family: 'open sans', arial, sans-serif;
         padding-left: 18px;
         padding-right: 18px;
@@ -95,6 +96,7 @@
       let currentInfoWindow;
       let service;
       let infoPane;
+
       function initMap() {
         // Initialize variables
         bounds = new google.maps.LatLngBounds();
@@ -162,7 +164,7 @@
         let request = {
           location: position,
           rankBy: google.maps.places.RankBy.DISTANCE,
-          keyword: 'sushi',
+          keyword: 'fun',
         };
 
         service = new google.maps.places.PlacesService(map);
@@ -214,7 +216,8 @@
       //show place details in an info window
       function showDetails(placeResult, marker, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
-          let placeInfowindow = new google.maps.infoWindow();
+          let placeInfowindow = new google.maps.InfoWindow();
+
           let rating = 'None';
           if (placeResult.rating) rating = placeResult.rating;
 
@@ -223,7 +226,7 @@
               placeResult.name +
               `<strong<<br>` +
               'Rating: ' +
-              placeResult.rating +
+              rating +
               `<div>`
           );
           placeInfowindow.open(marker.map, marker);
@@ -243,41 +246,42 @@
         while (infoPane.lastChild) {
           infoPane.removeChild(infoPane.lastChild);
         }
-      }
-      if (placeResult.photos) {
-        let firstPhoto = placeResult.photos[0];
-        let photo = document.createElement('img');
-        photo.classList.add('hero');
-        photo.src = firstPhoto.getURL();
-        infoPane.appendChild(photo);
-      }
-      let name = document.getElementById('h1');
-      name.classList.add('place');
-      name.textContent = placeResult.name;
-      infoPane.appendChild(name);
 
-      if (placeResult.rating) {
-        let rating = document.createElement('p');
-        rating.classList.add('details');
-        rating.textContent = `Rating: ${placeResult.rating} \ u272e`;
-        infoPane.appendChild(rating);
-      }
-      let address = document.createElement('p');
-      address.classList.add('details');
-      address.textContent = placeResult.formatted_address;
-      infoPane.appendChild(address);
+        if (placeResult.photos) {
+          let firstPhoto = placeResult.photos[0];
+          let photo = document.createElement('img');
+          photo.classList.add('hero');
+          photo.src = firstPhoto.getUrl();
+          infoPane.appendChild(photo);
+        }
+        let name = document.createElement('h1');
+        name.classList.add('place');
+        name.textContent = placeResult.name;
+        infoPane.appendChild(name);
 
-      if (placeResult.website) {
-        let websitePara = document.createElement('p');
-        let websiteLink = document.createElement('a');
-        let websiteUrl = document.createTextNode(placeResult.website);
-        websiteLink.appendChild(websiteUrl);
-        websiteLink.title = placeResult.website;
-        websiteLink.href = placeResult.website;
-        websitePara.appendChild(websiteLink);
-        infoPane.appendChild(websitePara);
+        if (placeResult.rating) {
+          let rating = document.createElement('p');
+          rating.classList.add('details');
+          rating.textContent = `Rating: ${placeResult.rating}`;
+          infoPane.appendChild(rating);
+        }
+        let address = document.createElement('p');
+        address.classList.add('details');
+        address.textContent = placeResult.formatted_address;
+        infoPane.appendChild(address);
+
+        if (placeResult.website) {
+          let websitePara = document.createElement('p');
+          let websiteLink = document.createElement('a');
+          let websiteUrl = document.createTextNode(placeResult.website);
+          websiteLink.appendChild(websiteUrl);
+          websiteLink.title = placeResult.website;
+          websiteLink.href = placeResult.website;
+          websitePara.appendChild(websiteLink);
+          infoPane.appendChild(websitePara);
+        }
+        infoPane.classList.add('open');
       }
-      infoPane.classList.add('open');
     </script>
 
     <!-- TODO: Step 1C, Get an API key -->
@@ -290,4 +294,3 @@
     ></script>
   </body>
 </html>
-
