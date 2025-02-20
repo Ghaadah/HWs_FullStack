@@ -3,6 +3,5 @@ node_modules/
 .eslint*
 package-lock.json
 package.json
-
-
+.env/
 
