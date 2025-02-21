@@ -3,8 +3,9 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' });
-  //res.render('index',  {title:`I am so coool!`});
+  res.redirect('/catalog');
+  //res.render('index', { title: 'Express' });
+  //res.send("Hello");
 });
 
 module.exports = router;
